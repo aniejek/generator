@@ -5,12 +5,36 @@ class Entity():
         self.primary_key = 0
 
     def to_sql(self, file):
+        val_list = []
+        col_list = []
         for arg in self.args:
-            pass
+            val_list.append(arg[1])
+            col_list.append(arg[0])
+        insert = 'INSERT INTO ' + self.name + ' ('
+        for col in col_list:
+            insert = insert + col + ', '
+        insert[insert.len() - 2] = ')'
+        values = 'values ('
+        for val in val_list:
+            try:
+                int(val)
+                values = values + str(val) + ', '
+            except ValueError:
+                values = values + "'" + val + "', "
+
+        with open(file, 'a') as sql:
+            insert.join(sql)
+            values.join(sql)
+
 
     def to_csv(self, file):
+        val_list = []
         for arg in self.args:
-            pass
+            val_list.append(arg[1])
+        separator = ','
+        line = separator.join(val_list)
+        with open(file, 'a') as csv:
+            line.join(csv)
 
 
 class Dyspozytornie(Entity):
