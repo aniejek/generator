@@ -1,4 +1,6 @@
 from random import randint
+
+
 class Entity():
     def __init__(self):
         self.name = ""
@@ -50,6 +52,21 @@ def take_random_line(file, size):
         for i, line in enumerate(fnames):
             if i == index:
                 return line[:-1]
+
+
+def generate_pesel(prev):
+    new = ''
+    inc_flag = True
+    for c in prev[::-1]:
+        if inc_flag:
+            if c == '9':
+                new = '0' + new
+            else:
+                new = str(int(c) + 1) + new
+                inc_flag = False
+        else:
+            new = c + new
+    return new
 
 
 class Dyspozytornie(Entity):
