@@ -1,3 +1,4 @@
+from random import randint
 class Entity():
     def __init__(self):
         self.name = ""
@@ -26,7 +27,6 @@ class Entity():
             insert.join(sql)
             values.join(sql)
 
-
     def to_csv(self, file):
         val_list = []
         for arg in self.args:
@@ -35,6 +35,21 @@ class Entity():
         line = separator.join(val_list)
         with open(file, 'a') as csv:
             line.join(csv)
+
+
+def size_of_list(file):
+    with open(file, 'r', encoding='utf8') as file:
+        for i, line in enumerate(file):
+            pass
+        return i + 1
+
+
+def take_random_line(file, size):
+    with open(file, 'r+', encoding='utf8') as fnames:
+        index = randint(0, size - 1)
+        for i, line in enumerate(fnames):
+            if i == index:
+                return line[:-1]
 
 
 class Dyspozytornie(Entity):
