@@ -14,20 +14,12 @@ class Entity():
             val_list.append(arg[1])
             col_list.append(arg[0])
         insert = 'INSERT INTO ' + self.name + ' ('
-        for col in col_list:
-            insert = insert + col + ', '
-        insert[insert.len() - 2] = ')'
-        values = 'values ('
-        for val in val_list:
-            try:
-                int(val)
-                values = values + str(val) + ', '
-            except ValueError:
-                values = values + "'" + val + "', "
-
+        columns = ','.join(col_list)
+        insert = insert + columns + ')'
+        values = '"' + '","'.join(val_list) + '"'
+        insert = insert + '\nvalues (' + values + ');\n'
         with open(file, 'a') as sql:
-            insert.join(sql)
-            values.join(sql)
+            sql.write(insert)
 
     def to_csv(self, file):
         val_list = []
@@ -36,7 +28,7 @@ class Entity():
         separator = ','
         line = separator.join(val_list)
         with open(file, 'a') as csv:
-            line.join(csv)
+            csv.write(line + '\n')
 
 
 def size_of_list(file):
@@ -67,6 +59,7 @@ def generate_pesel(prev):
         else:
             new = c + new
     return new
+
 
 class Dyspozytornie(Entity):
     def __init__(self, miasto = ''):
