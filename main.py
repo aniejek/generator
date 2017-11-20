@@ -6,7 +6,7 @@ LAST_NAME_LIST = 'nazwiska.txt'
 LAST_NAME_LIST_SIZE = t.size_of_list(LAST_NAME_LIST)
 
 LICZBA_DYSPOZYTOROW = int(input('Podaj liczbę dyspozytorow: '))
-#LICZBA_KIEROWCOW = int(input('Prodaj liczbe kierowcow: '))
+LICZBA_KIEROWCOW = int(input('Prodaj liczbe kierowcow: '))
 #LICZBA_KLIENTOW = int(input('Podaj liczbe klientow: '))
 #LICZBA_SAMOCHODOW = int(input('Podaj liczbe samochodow: '))
 #LICZBA_APLIKACJI = int(input('Podaj liczbe aplikacji: '))
