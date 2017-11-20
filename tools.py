@@ -68,7 +68,6 @@ def generate_pesel(prev):
             new = c + new
     return new
 
-
 class Dyspozytornie(Entity):
     def __init__(self, miasto = ''):
         self.name = 'Dyspozytornie'
