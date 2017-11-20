@@ -147,8 +147,8 @@ class Wykorzystania(Entity):
 class Samochody(Entity):
     def __init__(self, numer_rejestracja = '', data_przegladu = '', marka = '', model = '', rocznik = '', czy_nasz = ''):
         self.name = 'Samochody'
-        self.args = [('Numer_rejestracyjny', numer_rejestracja), ('Data_ostatniego_przegladu',
-                                                                  data_przegladu),
+        self.args = [('Numer_rejestracyjny', numer_rejestracja),
+                     ('Data_ostatniego_przegladu', data_przegladu),
                      ('Marka', marka), ('Model', model), ('Rocznik', rocznik), ('Czyj', czy_nasz)]
         self.primary_key = 0
 
