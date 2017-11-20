@@ -1,5 +1,6 @@
+# -*- coding: utf-8 -*-
 from random import randint
-
+from datetime import date
 
 class Entity():
     def __init__(self):
@@ -40,19 +41,25 @@ class Entity():
 
 
 def size_of_list(file):
-    with open(file, 'r', encoding='utf8') as file:
+    #with open(file, 'r', encoding='utf8') as file:
+    with open(file, 'r') as file:
         for i, line in enumerate(file):
             pass
         return i + 1
 
 
 def take_random_line(file, size):
-    with open(file, 'r+', encoding='utf8') as fnames:
+    #with open(file, 'r+', encoding='utf8') as fnames:
+    with open(file, 'r+') as fnames:
         index = randint(0, size - 1)
         for i, line in enumerate(fnames):
             if i == index:
                 return line[:-1]
 
+
+# Returns a random date higher than the given argument.
+def get_random_date(begin=date(2016,6,30), end=date.today()):
+    return date.fromordinal(randint(begin.toordinal(), end.toordinal()))
 
 def generate_pesel(prev):
     new = ''
