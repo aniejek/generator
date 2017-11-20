@@ -14,9 +14,9 @@ class Entity():
             val_list.append(arg[1])
             col_list.append(arg[0])
         insert = 'INSERT INTO ' + self.name + ' ('
-        columns = ','.join(col_list)
+        columns = ', '.join(col_list)
         insert = insert + columns + ')'
-        values = '"' + '","'.join(val_list) + '"'
+        values = '"' + '", "'.join(val_list) + '"'
         insert = insert + '\nvalues (' + values + ');\n'
         with open(file, 'a') as sql:
             sql.write(insert)
