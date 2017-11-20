@@ -26,3 +26,5 @@ for i in range(LICZBA_DYSPOZYTOROW):
     dyspozytorzy.append(t.Dyspozytorzy(fname, lname, current_pesel + '4', fk_dyspozytornie))
     current_pesel = t.generate_pesel(current_pesel)
 
+for i in range(LICZBA_KART):
+    pass#TODO
