@@ -70,14 +70,14 @@ def generate_pesel(prev):
 
 
 class Dyspozytornie(Entity):
-    def __init__(self, miasto):
+    def __init__(self, miasto = ''):
         self.name = 'Dyspozytornie'
         self.args = [('Miasto', miasto)]
         self.primary_key = 0
 
 
 class Dyspozytorzy(Entity):
-    def __init__(self, imie, nazwisko, pesel, fk_dyspozytornie):
+    def __init__(self, imie = '', nazwisko = '', pesel = '', fk_dyspozytornie = ''):
         self.name = 'Dyspozytorzy'
         self.args = [('Imie', imie), ('Nazwisko', nazwisko), ('PESEL', pesel),
                      ('FK_Dyspozytornie', fk_dyspozytornie)]
@@ -85,7 +85,7 @@ class Dyspozytorzy(Entity):
 
 
 class Kierowcy(Entity):
-    def __init__(self, imie, nazwisko, pesel, data_rejestracji):
+    def __init__(self, imie = '', nazwisko = '', pesel = '', data_rejestracji = ''):
         self.name = 'Kierowcy'
         self.args = [('Imie', imie), ('Nazwisko', nazwisko), ('PESEL', pesel),
                      ('Data Rejestracji', data_rejestracji)]
@@ -93,7 +93,7 @@ class Kierowcy(Entity):
 
 
 class Klienci(Entity):
-    def __init__(self, imie, nazwisko, telefon, id):
+    def __init__(self, imie = '', nazwisko = '', telefon = '', id = ''):
         self.name = 'Klienci'
         self.args = [('Imie', imie), ('Nazwisko', nazwisko), ('Telefon', telefon),
                      ('Id', id)]
@@ -101,9 +101,9 @@ class Klienci(Entity):
 
 
 class Przejazdy(Entity):
-    def __init__(self, data, id, ocena, poczatek_ulica, poczatek_numer_domu,
-                 poczatek_miasto, koniec_ulica, koniec_numer_domu, koniec_miasto,
-                 koszt, napiwek, czas, fk_klienci, fk_kierowcy, fk_dyspozytorzy):
+    def __init__(self, data = '', id = '', ocena = '', poczatek_ulica = '', poczatek_numer_domu = '',
+                 poczatek_miasto = '', koniec_ulica = '', koniec_numer_domu = '', koniec_miasto = '',
+                 koszt = '', napiwek = '', czas = '', fk_klienci = '', fk_kierowcy = '', fk_dyspozytorzy = ''):
         self.name = 'Przejazdy'
         self.args = [('Data', data), ('Id', id), ('Ocena', ocena),
                      ('Początek_ulica', poczatek_ulica),
@@ -119,8 +119,8 @@ class Przejazdy(Entity):
 
 
 class Aplikacje(Entity):
-    def __init__(self, ulica, numer_domu, miasto, zrodlo, data_rejestracji,
-                 fk_klienci):
+    def __init__(self, ulica = '', numer_domu = '', miasto = '', zrodlo = '', data_rejestracji = '',
+                 fk_klienci = ''):
         self.name = 'Aplikacje'
         self.args = [('Ulica', ulica), ('Numer_domu', numer_domu),
                      ('Miasto', miasto), ('Skad_sie_dowiedzial', zrodlo),
@@ -130,14 +130,14 @@ class Aplikacje(Entity):
 
 
 class Karty(Entity):
-    def __init__(self, numer, kod, fk_klient):
+    def __init__(self, numer = '', kod = '', fk_klient = ''):
         self.name = 'Karty'
         self.args = [('Numer', numer), ('Kod', kod), ('FK_Klient', fk_klient)]
         self.primary_key = 0
 
 
 class Wykorzystania(Entity):
-    def __init__(self, numer_rejestracja, pesel, data_rozpoczecia, data_zakonczenia):
+    def __init__(self, numer_rejestracja = '', pesel = '', data_rozpoczecia = '', data_zakonczenia = ''):
         self.name = 'Wykorzystania'
         self.args = [('Numer_rejestracyjny', numer_rejestracja), ('PESEL', pesel),
                      ('Data_rozpoczecia', data_rozpoczecia), ('Data_zakonczenia', data_zakonczenia)]
@@ -145,7 +145,7 @@ class Wykorzystania(Entity):
 
 
 class Samochody(Entity):
-    def __init__(self, numer_rejestracja, data_przegladu, marka, model, rocznik, czy_nasz):
+    def __init__(self, numer_rejestracja = '', data_przegladu = '', marka = '', model = '', rocznik = '', czy_nasz = ''):
         self.name = 'Samochody'
         self.args = [('Numer_rejestracyjny', numer_rejestracja), ('Data_ostatniego_przegladu',
                                                                   data_przegladu),
