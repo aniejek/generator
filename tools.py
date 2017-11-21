@@ -102,7 +102,7 @@ class Klienci(Entity):
 class Przejazdy(Entity):
     def __init__(self, data = '', id = '', ocena = '', poczatek_ulica = '', poczatek_numer_domu = '',
                  poczatek_miasto = '', koniec_ulica = '', koniec_numer_domu = '', koniec_miasto = '',
-                 koszt = '', napiwek = '', czas = '', fk_klienci = '', fk_kierowcy = '', fk_dyspozytorzy = ''):
+                 koszt = '', napiwek = '', czas = '', godzina = '', fk_klienci = '', fk_kierowcy = '', fk_dyspozytorzy = ''):
         self.name = 'Przejazdy'
         self.args = [('Data', data), ('Id', id), ('Ocena', ocena),
                      ('Początek_ulica', poczatek_ulica),
@@ -110,8 +110,8 @@ class Przejazdy(Entity):
                      ('Poczatek_miasto', poczatek_miasto),
                      ('Koniec_ulica', koniec_ulica),
                      ('Koniec_numer_domu', koniec_numer_domu),
-                     ('Koniec_miasto', koniec_miasto), ('koszt', koszt),
-                     ('Napiwek', napiwek), ('Czas', czas),
+                     ('Koniec_miasto', koniec_miasto), ('Koszt', koszt),
+                     ('Napiwek', napiwek), ('Czas', czas), ('Godzina', czas),
                      ('FK_Klienci', fk_klienci), ('FK_Kierowcy', fk_kierowcy),
                      ('FK_Dyspozytorzy', fk_dyspozytorzy)]
         self.primary_key = 1
