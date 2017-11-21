@@ -96,7 +96,7 @@ class Klienci(Entity):
         self.name = 'Klienci'
         self.args = [('Imie', imie), ('Nazwisko', nazwisko), ('Telefon', telefon),
                      ('Id', id)]
-        self.primary_key = 0 #TODO
+        self.primary_key = 3
 
 
 class Przejazdy(Entity):
