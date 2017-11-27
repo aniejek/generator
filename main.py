@@ -19,15 +19,15 @@ cities=["Gdańsk","Gdynia","Wrocław","Poznań","Straszyn","Sopot","Pruszcz Gda�
 streets=["ul. Długa","ul. Szeroka","ul. Konwaliowa","ul. Focha","ul. Jaworowa","ul. Lipowa","ul. Dębowa"]
 sources=["Od znajomego", "Przez reklamę na Facebooku", "Przez reklamę na innym portalu", "Przez reklamę tradycyjną", "Inne"]
 
-LICZBA_DYSPOZYTOROW = int(input('Podaj liczbę dyspozytorow: '))
-LICZBA_KIEROWCOW = int(input('Prodaj liczbe kierowcow: '))
-LICZBA_KLIENTOW = int(input('Podaj liczbe klientow: '))
-LICZBA_SAMOCHODOW = int(input('Podaj liczbe samochodow: '))
-LICZBA_APLIKACJI = int(input('Podaj liczbe aplikacji: '))
+LICZBA_DYSPOZYTOROW = 10#int(input('Podaj liczbę dyspozytorow: '))
+LICZBA_KIEROWCOW = 20#int(input('Prodaj liczbe kierowcow: '))
+LICZBA_KLIENTOW = 40#int(input('Podaj liczbe klientow: '))
+LICZBA_SAMOCHODOW = 25#int(input('Podaj liczbe samochodow: '))
+LICZBA_APLIKACJI = 24#int(input('Podaj liczbe aplikacji: '))
 assert LICZBA_APLIKACJI <= LICZBA_KLIENTOW
-LICZBA_KART = int(input('Podaj liczbe kart platniczych: '))
-LICZBA_WYKORZYSTAN = int(input('Podaj liczbe wykorzystan: '))
-LICZBA_PRZEJAZDOW = int(input('Podaj liczbe przejazdow: '))
+LICZBA_KART = 10#int(input('Podaj liczbe kart platniczych: '))
+LICZBA_WYKORZYSTAN = 26#int(input('Podaj liczbe wykorzystan: '))
+LICZBA_PRZEJAZDOW = 45#int(input('Podaj liczbe przejazdow: '))
 
 dyspozytornie = [t.Dyspozytornie('Gdańsk'), t.Dyspozytornie('Wrocław'), t.Dyspozytornie('Poznań')]
 dyspozytorzy = []
@@ -44,9 +44,10 @@ for i in range(LICZBA_DYSPOZYTOROW):
     fname = t.take_random_line(FIRST_NAME_LIST, FIRST_NAME_LIST_SIZE)
     lname = t.take_random_line(LAST_NAME_LIST, LAST_NAME_LIST_SIZE)
     dyspozytornia = dyspozytornie[t.randint(0, 2)]
-    fk_dyspozytornie = dyspozytornia.args[dyspozytornia.primary_key]
+    fk_dyspozytornie = dyspozytornia.args[dyspozytornia.primary_key][1]
     dyspozytorzy.append(t.Dyspozytorzy(fname, lname, current_pesel + '4', fk_dyspozytornie))
     current_pesel = t.generate_pesel(current_pesel)
+
 
 for i in range(LICZBA_SAMOCHODOW):
     make=t.take_random_line(CAR_MAKE_LIST,CAR_MAKE_LIST_SIZE)
@@ -78,12 +79,12 @@ for i in range(LICZBA_APLIKACJI):
     zrodlo=random.choice(sources)
     registration_date = t.get_random_date()
     fk_klienci = klienci_copy.pop()
-    aplikacje.append(t.Aplikacje(street,house,city,zrodlo,registration_date,fk_klienci))
+    aplikacje.append(t.Aplikacje(street,house,city,zrodlo,registration_date,fk_klienci.args[fk_klienci.primary_key][1]))
 
 for i in range(LICZBA_KART):
     number = random.randint(1000000000000000,9999999999999999)
     security= random.randint(100,999)
-    fk_klienci = random.choice([x.args[x.primary_key] for x in aplikacje])
+    fk_klienci = random.choice([x.args[x.primary_key][1] for x in aplikacje])
     karty.append(t.Karty(number,security,fk_klienci))
 
 for i in range(LICZBA_WYKORZYSTAN):
@@ -109,6 +110,31 @@ for i in range(LICZBA_PRZEJAZDOW):
     fk_klienci = random.choice(klienci)
     fk_kierowcy = wykorzystanie.args[1][1]
     fk_dyspozytorzy = random.choice(dyspozytorzy)
-    przejazdy.append(t.Przejazdy(date,i,ocena,poczatek_ulica,poczatek_nrdomu,poczatek_miasto,koniec_ulica,koniec_nrdomu,koniec_miasto,koszt,napiwek,czas,fk_klienci,fk_kierowcy,fk_dyspozytorzy))
+    przejazdy.append(t.Przejazdy(date,i,ocena,poczatek_ulica,poczatek_nrdomu,poczatek_miasto,koniec_ulica,koniec_nrdomu,koniec_miasto,koszt,napiwek,czas,fk_klienci.args[fk_klienci.primary_key][1],fk_kierowcy,fk_dyspozytorzy.args[fk_dyspozytorzy.primary_key][1]))
 
+for e in dyspozytornie:
+    e.to_sql('inserts.sql')
 
+for e in dyspozytorzy:
+    e.to_sql('inserts.sql')
+
+for e in kierowcy:
+    e.to_sql('inserts.sql')
+
+for e in klienci:
+    e.to_sql('inserts.sql')
+
+for e in aplikacje:
+    e.to_sql('inserts.sql')
+
+for e in karty:
+    e.to_sql('inserts.sql')
+
+for e in przejazdy:
+    e.to_sql('inserts.sql')
+
+for e in samochody:
+    e.to_csv('csv1.csv')
+
+for e in wykorzystania:
+    e.to_csv('csv2.csv')

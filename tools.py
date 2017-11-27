@@ -12,23 +12,23 @@ class Entity():
         val_list = []
         col_list = []
         for arg in self.args:
-            val_list.append(arg[1])
+            val_list.append(str(arg[1]))
             col_list.append(arg[0])
         insert = 'INSERT INTO ' + self.name + ' ('
         columns = ', '.join(col_list)
         insert = insert + columns + ')'
         values = '"' + '", "'.join(val_list) + '"'
-        insert = insert + '\nvalues (' + values + ');\n'
-        with open(file, 'a') as sql:
+        insert = insert + '\nVALUES (' + values + ');\n'
+        with open(file, 'a', encoding='utf8') as sql:
             sql.write(insert)
 
     def to_csv(self, file):
         val_list = []
         for arg in self.args:
-            val_list.append(arg[1])
+            val_list.append(str(arg[1]))
         separator = ','
         line = separator.join(val_list)
-        with open(file, 'a') as csv:
+        with open(file, 'a', encoding='utf8') as csv:
             csv.write(line + '\n')
 
     def update(self, file, index, value):
@@ -36,20 +36,20 @@ class Entity():
         line = "UPDATE " + self.name + "\nSET " + str(self.args[0]) + " = "
         line += '"' + str(value) + '"\n' + 'WHERE ' + str(self.args[self.primary_key][0])
         line += ' = "' + str(self.args[self.primary_key][1]) + '";'
-        with open(file, 'a') as sql:
+        with open(file, 'a', encoding='utf8') as sql:
             sql.write(line)
 
 def size_of_list(file):
-    #with open(file, 'r', encoding='utf8') as file:
-    with open(file, 'r') as file:
+    with open(file, 'r', encoding='utf8') as file:
+    #with open(file, 'r') as file:
         for i, line in enumerate(file):
             pass
         return i + 1
 
 
 def take_random_line(file, size):
-    #with open(file, 'r+', encoding='utf8') as fnames:
-    with open(file, 'r+') as fnames:
+    with open(file, 'r+', encoding='utf8') as fnames:
+    #with open(file, 'r+') as fnames:
         index = randint(0, size - 1)
         for i, line in enumerate(fnames):
             if i == index:
