@@ -31,6 +31,13 @@ class Entity():
         with open(file, 'a') as csv:
             csv.write(line + '\n')
 
+    def update(self, file, index, value):
+        self.args[index][1] = value
+        line = "UPDATE " + self.name + "\nSET " + str(self.args[0]) + " = "
+        line += '"' + str(value) + '"\n' + 'WHERE ' + str(self.args[self.primary_key][0])
+        line += ' = "' + str(self.args[self.primary_key][1]) + '";'
+        with open(file, 'a') as sql:
+            sql.write(line)
 
 def size_of_list(file):
     #with open(file, 'r', encoding='utf8') as file:
@@ -150,4 +157,3 @@ class Samochody(Entity):
                      ('Data_ostatniego_przegladu', data_przegladu),
                      ('Marka', marka), ('Model', model), ('Rocznik', rocznik), ('Czyj', czy_nasz)]
         self.primary_key = 0
-
