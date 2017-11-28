@@ -1,3 +1,11 @@
+DROP TABLE Przejazdy;
+DROP TABLE Karty;
+DROP TABLE Aplikacje;
+DROP TABLE Klienci;
+DROP TABLE Dyspozytorzy;
+DROP TABLE Dyspozytornie;
+DROP TABLE Kierowcy;
+
 CREATE TABLE Dyspozytornie (
 	Miasto varchar(20) NOT NULL,
 	PRIMARY KEY (Miasto)
@@ -8,7 +16,7 @@ CREATE TABLE Dyspozytorzy (
 	Nazwisko varchar(20) NOT NULL,
 	PESEL char(11) NOT NULL,
 	FK_Dyspozytornie varchar(20) NOT NULL,
-	FOREIGN KEY(FK_Dyspozytornie),
+	FOREIGN KEY(FK_Dyspozytornie) REFERENCES Dyspozytornie(Miasto),
 	PRIMARY KEY(PESEL)
 );
 
@@ -35,7 +43,7 @@ CREATE TABLE Aplikacje (
 	Skad_sie_dowiedzial varchar(60) NOT NULL,
 	Data_rejestracji datetime NOT NULL,
 	FK_Klienci int NOT NULL,
-	FOREIGN KEY(FK_Klienci),
+	FOREIGN KEY(FK_Klienci) REFERENCES Klienci(ID),
 	PRIMARY KEY(FK_Klienci)
 );
 
@@ -43,7 +51,7 @@ CREATE TABLE Karty (
 	Numer varchar(24) NOT NULL,
 	Kod char(3) NOT NULL,
 	FK_Klienci int NOT NULL,
-	FOREIGN KEY(FK_Klienci),
+	FOREIGN KEY(FK_Klienci) REFERENCES Klienci(ID),
 	PRIMARY KEY(Numer)
 );
 
@@ -59,14 +67,14 @@ CREATE TABLE Przejazdy (
 	Koniec_miasto varchar(30) NOT NULL,
 	Koszt smallmoney NOT NULL,
 	Napiwek smallmoney,
-	Czas time NOT NULL,
+	Czas int NOT NULL,
 	FK_Klienci int NOT NULL,
 	FK_Kierowcy char(11) NOT NULL,
 	FK_Dyspozytorzy char(11) NOT NULL,
 	Godzina time NOT NULL,
-	FOREIGN KEY(FK_Klienci),
-	FOREIGN KEY(FK_Kierowcy),
-	FOREIGN KEY(FK_Dyspozytorzy),
+	FOREIGN KEY(FK_Klienci) REFERENCES Klienci(ID),
+	FOREIGN KEY(FK_Kierowcy) REFERENCES Kierowcy(PESEL),
+	FOREIGN KEY(FK_Dyspozytorzy) REFERENCES Dyspozytorzy(PESEL),
 	PRIMARY KEY(ID)
 );
 	
