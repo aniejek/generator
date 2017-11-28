@@ -48,7 +48,6 @@ for i in range(LICZBA_DYSPOZYTOROW):
     dyspozytorzy.append(t.Dyspozytorzy(fname, lname, current_pesel + '4', fk_dyspozytornie))
     current_pesel = t.generate_pesel(current_pesel)
 
-
 for i in range(LICZBA_SAMOCHODOW):
     make=t.take_random_line(CAR_MAKE_LIST,CAR_MAKE_LIST_SIZE)
     model = t.take_random_line(CAR_MODEL_LIST,CAR_MODEL_LIST_SIZE)
@@ -94,6 +93,7 @@ for i in range(LICZBA_WYKORZYSTAN):
     data_zakonczenia=t.get_random_date(data_rozpoczecia)
     wykorzystania.append(t.Wykorzystania(nr,pesel,data_rozpoczecia,data_zakonczenia))
 
+
 for i in range(LICZBA_PRZEJAZDOW):
     wykorzystanie = random.choice(wykorzystania)
     date = t.get_random_date(wykorzystanie.args[2][1],wykorzystanie.args[3][1])
@@ -138,3 +138,41 @@ for e in samochody:
 
 for e in wykorzystania:
     e.to_csv('csv2.csv')
+
+
+"""
+drugi punkt w czasie
+"""
+
+NOWE_PRZEJAZDY = 30
+NOWE_TELEFONY_KLIENTÓW = 10
+for i in range(NOWE_PRZEJAZDY):
+    wykorzystanie = random.choice(wykorzystania)
+    date = t.get_random_date(wykorzystanie.args[2][1], wykorzystanie.args[3][1])
+    ocena = random.randint(1, 5)
+    poczatek_ulica = random.choice(streets)
+    poczatek_nrdomu = random.randint(1, 200)
+    poczatek_miasto = random.choice(cities)
+    koniec_ulica = random.choice(streets)
+    koniec_nrdomu = random.randint(1, 200)
+    koniec_miasto = random.choice(cities)
+    koszt = random.randint(15, 50)
+    napiwek = random.randint(0, 20)
+    czas = random.randint(1, 3600)
+    fk_klienci = random.choice(klienci)
+    fk_kierowcy = wykorzystanie.args[1][1]
+    fk_dyspozytorzy = random.choice(dyspozytorzy)
+    przejazdy.append(
+        t.Przejazdy(date, i, ocena, poczatek_ulica, poczatek_nrdomu, poczatek_miasto, koniec_ulica, koniec_nrdomu,
+                    koniec_miasto, koszt, napiwek, czas, fk_klienci.args[fk_klienci.primary_key][1], fk_kierowcy,
+                    fk_dyspozytorzy.args[fk_dyspozytorzy.primary_key][1]))
+
+
+for i in range(NOWE_TELEFONY_KLIENTÓW):
+    random.choice(klienci).args[2][1]=random.randint(500000000,699999999)
+
+for o in przejazdy:
+    o.update('update.sql')
+
+for o in klienci:
+    o.update('update.sql')
