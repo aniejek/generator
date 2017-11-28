@@ -17,7 +17,7 @@ class Entity():
         insert = 'INSERT INTO ' + self.name + ' ('
         columns = ', '.join(col_list)
         insert = insert + columns + ')'
-        values = '"' + '", "'.join(val_list) + '"'
+        values = "'" + "', '".join(val_list) + "'"
         insert = insert + '\nVALUES (' + values + ');\n'
         with open(file, 'a', encoding='utf8') as sql:
             sql.write(insert)
@@ -32,7 +32,7 @@ class Entity():
             csv.write(line + '\n')
 
     def update(self, file, index, value):
-        self.args[index][1] = value
+        self.args[index] = (self.args[index][0], value)
         line = "UPDATE " + self.name + "\nSET " + str(self.args[0]) + " = "
         line += '"' + str(value) + '"\n' + 'WHERE ' + str(self.args[self.primary_key][0])
         line += ' = "' + str(self.args[self.primary_key][1]) + '";'
@@ -94,7 +94,7 @@ class Kierowcy(Entity):
     def __init__(self, imie = '', nazwisko = '', pesel = '', data_rejestracji = ''):
         self.name = 'Kierowcy'
         self.args = [('Imie', imie), ('Nazwisko', nazwisko), ('PESEL', pesel),
-                     ('Data Rejestracji', data_rejestracji)]
+                     ('Data_Rejestracji', data_rejestracji)]
         self.primary_key = 2
 
 
@@ -112,13 +112,13 @@ class Przejazdy(Entity):
                  koszt = '', napiwek = '', czas = '', godzina = '', fk_klienci = '', fk_kierowcy = '', fk_dyspozytorzy = ''):
         self.name = 'Przejazdy'
         self.args = [('Data', data), ('Id', id), ('Ocena', ocena),
-                     ('Początek_ulica', poczatek_ulica),
+                     ('Poczatek_ulica', poczatek_ulica),
                      ('Poczatek_numer_domu', poczatek_numer_domu),
                      ('Poczatek_miasto', poczatek_miasto),
                      ('Koniec_ulica', koniec_ulica),
                      ('Koniec_numer_domu', koniec_numer_domu),
                      ('Koniec_miasto', koniec_miasto), ('Koszt', koszt),
-                     ('Napiwek', napiwek), ('Czas', czas), ('Godzina', czas),
+                     ('Napiwek', napiwek), ('Czas', czas), ('Godzina', godzina),
                      ('FK_Klienci', fk_klienci), ('FK_Kierowcy', fk_kierowcy),
                      ('FK_Dyspozytorzy', fk_dyspozytorzy)]
         self.primary_key = 1
@@ -138,16 +138,16 @@ class Aplikacje(Entity):
 class Karty(Entity):
     def __init__(self, numer = '', kod = '', fk_klient = ''):
         self.name = 'Karty'
-        self.args = [('Numer', numer), ('Kod', kod), ('FK_Klient', fk_klient)]
+        self.args = [('Numer', numer), ('Kod', kod), ('FK_Klienci', fk_klient)]
         self.primary_key = 0
 
 
 class Wykorzystania(Entity):
-    def __init__(self, numer_rejestracja = '', pesel = '', data_rozpoczecia = '', data_zakonczenia = ''):
+    def __init__(self, id, numer_rejestracja = '', pesel = '', data_rozpoczecia = '', data_zakonczenia = ''):
         self.name = 'Wykorzystania'
-        self.args = [('Numer_rejestracyjny', numer_rejestracja), ('PESEL', pesel),
+        self.args = [('ID', id), ('Numer_rejestracyjny', numer_rejestracja), ('PESEL', pesel),
                      ('Data_rozpoczecia', data_rozpoczecia), ('Data_zakonczenia', data_zakonczenia)]
-        self.primary_key = 0#TODO
+        self.primary_key = 0
 
 
 class Samochody(Entity):
