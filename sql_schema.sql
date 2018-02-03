@@ -68,6 +68,8 @@ CREATE TABLE Przejazdy (
 	Koszt smallmoney NOT NULL,
 	Napiwek smallmoney,
 	Czas int NOT NULL,
+	Nr_faktury int,
+	FK_Samochody varchar(7),
 	FK_Klienci int NOT NULL,
 	FK_Kierowcy char(11) NOT NULL,
 	FK_Dyspozytorzy char(11) NOT NULL,
