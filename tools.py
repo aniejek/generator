@@ -3,7 +3,7 @@ from random import randint
 from datetime import date
 
 
-class Entity():
+class Entity:
     def __init__(self):
         self.name = ""
         self.args = None
@@ -40,9 +40,12 @@ class Entity():
         with open(file, 'a', encoding='utf8') as sql:
             sql.write(line)
 
-def clearfile(file):
-    with open(file,'w') as file:
+
+def clear_file(file, schema=""):
+    with open(file, 'w') as file:
+        file.write(schema)
         file.close()
+
 
 def size_of_list(file):
     with open(file, 'r', encoding='utf8') as file:

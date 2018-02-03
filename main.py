@@ -5,8 +5,10 @@ import time
 from datetime import date
 import tools as t
 
-for i in ["csv1.csv", "csv2.csv", "inserts.sql","update.sql"]:
-    t.clearfile(i)
+t.clear_file("csv1.csv", "nr_rejestracyjny,data_przegladu,marka,model,rocznik,czy_nasz")
+t.clear_file("csv2.csv", "id,nr_rejestracyjny,pesel,data_rozpoczecia,data_zakonczenia")
+for i in ["inserts.sql", "update.sql"]:
+    t.clear_file(i)
 
 FIRST_NAME_LIST = 'Imionam.txt'
 FIRST_NAME_LIST_SIZE = t.size_of_list(FIRST_NAME_LIST)
