@@ -5,7 +5,7 @@ import time
 from datetime import date
 import tools as t
 
-for i in ["csv1.csv", "csv2.csv", "inserts.sql"]:
+for i in ["csv1.csv", "csv2.csv", "inserts.sql","update.sql"]:
     t.clearfile(i)
 
 FIRST_NAME_LIST = 'Imionam.txt'
@@ -40,6 +40,39 @@ karty=[]
 wykorzystania=[]
 przejazdy=[]
 current_pesel = '7010110332'
+
+
+def generuj_przejazdy(liczba):
+    generuj_przejazdy.nr_faktury = 1
+    for i in range(liczba):
+        faktura = random.choice(["null","null","null",generuj_przejazdy.nr_faktury])
+        if faktura!="null":
+            generuj_przejazdy.nr_faktury+=1
+        wykorzystanie = random.choice(wykorzystania)
+        date = t.get_random_date(wykorzystanie.args[3][1], wykorzystanie.args[4][1])
+        ocena = random.randint(1, 5)
+        poczatek_ulica = random.choice(streets)
+        poczatek_nrdomu = random.randint(1, 200)
+        poczatek_miasto = random.choice(cities)
+        koniec_ulica = random.choice(streets)
+        koniec_nrdomu = random.randint(1, 200)
+        koniec_miasto = random.choice(cities)
+        koszt = random.randint(15, 50)
+        napiwek = random.randint(0, 20)
+        czas = random.randint(1, 60)
+        godzina = str(random.randint(0, 23)).zfill(2) + ':' + str(random.randint(0, 59)).zfill(2) + ':' + str(
+            random.randint(0, 59)).zfill(2)
+        fk_klienci = random.choice(klienci)
+        fk_kierowcy = wykorzystanie.args[2][1]
+        fk_dyspozytorzy = random.choice(dyspozytorzy)
+        fk_samochody = wykorzystanie.args[1][1]
+        print(fk_samochody)
+        przejazdy.append(t.Przejazdy(date, i, ocena, poczatek_ulica, poczatek_nrdomu, poczatek_miasto,
+                                     koniec_ulica, koniec_nrdomu, koniec_miasto, koszt, napiwek, czas, godzina, faktura,
+                                     fk_klienci.args[fk_klienci.primary_key][1], fk_kierowcy,
+                                     fk_dyspozytorzy.args[fk_dyspozytorzy.primary_key][1],
+                                     fk_samochody))
+
 
 for i in range(LICZBA_DYSPOZYTOROW):
     fname = t.take_random_line(FIRST_NAME_LIST, FIRST_NAME_LIST_SIZE)
@@ -95,29 +128,7 @@ for i in range(LICZBA_WYKORZYSTAN):
     wykorzystania.append(t.Wykorzystania(i,nr,pesel,data_rozpoczecia,data_zakonczenia))
 
 
-for i in range(LICZBA_PRZEJAZDOW):
-    wykorzystanie = random.choice(wykorzystania)
-    date = t.get_random_date(wykorzystanie.args[3][1],wykorzystanie.args[4][1])
-    ocena = random.randint(1,5)
-    poczatek_ulica=random.choice(streets)
-    poczatek_nrdomu=random.randint(1,200)
-    poczatek_miasto=random.choice(cities)
-    koniec_ulica =random.choice(streets)
-    koniec_nrdomu=random.randint(1, 200)
-    koniec_miasto=random.choice(cities)
-    koszt = random.randint(15,50)
-    napiwek = random.randint(0,20)
-    czas = random.randint(1,60)
-    godzina = str(random.randint(0, 23)).zfill(2) + ':' + str(random.randint(0, 59)).zfill(2) + ':' + str(random.randint(0, 59)).zfill(2)
-    fk_klienci = random.choice(klienci)
-    fk_kierowcy = wykorzystanie.args[2][1]
-    fk_dyspozytorzy = random.choice(dyspozytorzy)
-    fk_samochody = wykorzystanie.args[1][1]
-    print(fk_samochody)
-    przejazdy.append(t.Przejazdy(date,i,ocena,poczatek_ulica,poczatek_nrdomu,poczatek_miasto,
-        koniec_ulica,koniec_nrdomu,koniec_miasto,koszt,napiwek,czas,godzina,
-        fk_klienci.args[fk_klienci.primary_key][1],fk_kierowcy,fk_dyspozytorzy.args[fk_dyspozytorzy.primary_key][1],
-        fk_samochody))
+generuj_przejazdy(LICZBA_PRZEJAZDOW)
 
 for e in dyspozytornie:
     e.to_sql('inserts.sql')
@@ -153,31 +164,7 @@ drugi punkt w czasie
 
 NOWE_PRZEJAZDY = 30
 NOWE_TELEFONY_KLIENTÓW = 10
-for i in range(NOWE_PRZEJAZDY):
-    wykorzystanie = random.choice(wykorzystania)
-    date = t.get_random_date(wykorzystanie.args[3][1],wykorzystanie.args[4][1])
-    ocena = random.randint(1,5)
-    poczatek_ulica=random.choice(streets)
-    poczatek_nrdomu=random.randint(1,200)
-    poczatek_miasto=random.choice(cities)
-    koniec_ulica =random.choice(streets)
-    koniec_nrdomu=random.randint(1, 200)
-    koniec_miasto=random.choice(cities)
-    koszt = random.randint(15,50)
-    napiwek = random.randint(0,20)
-    czas = random.randint(1,60)
-    godzina = str(random.randint(0, 23)).zfill(2) + ':' + str(random.randint(0, 59)).zfill(2) + ':' + str(random.randint(0, 59)).zfill(2)
-    fk_klienci = random.choice(klienci)
-    fk_kierowcy = wykorzystanie.args[2][1]
-    fk_dyspozytorzy = random.choice(dyspozytorzy)
-    fk_kierowcy = wykorzystanie.args[2][1]
-    przejazd = t.Przejazdy(date,i+LICZBA_PRZEJAZDOW,ocena,poczatek_ulica,poczatek_nrdomu,poczatek_miasto,koniec_ulica,
-                           koniec_nrdomu,koniec_miasto,koszt,napiwek,czas,godzina,
-                           fk_klienci.args[fk_klienci.primary_key][1],fk_kierowcy,
-                           fk_dyspozytorzy.args[fk_dyspozytorzy.primary_key][1],fk_samochody)
-    przejazdy.append(przejazd)
-    przejazd.to_sql('inserts.sql')
-
+generuj_przejazdy(NOWE_PRZEJAZDY)
 
 
 for i in range(NOWE_TELEFONY_KLIENTÓW):
