@@ -2,6 +2,7 @@
 from random import randint
 from datetime import date
 
+
 class Entity():
     def __init__(self):
         self.name = ""
@@ -38,6 +39,10 @@ class Entity():
         line += ' = "' + str(self.args[self.primary_key][1]) + '";'
         with open(file, 'a', encoding='utf8') as sql:
             sql.write(line)
+
+def clearfile(file):
+    with open(file,'w') as file:
+        file.close()
 
 def size_of_list(file):
     with open(file, 'r', encoding='utf8') as file:
@@ -109,18 +114,26 @@ class Klienci(Entity):
 class Przejazdy(Entity):
     def __init__(self, data = '', id = '', ocena = '', poczatek_ulica = '', poczatek_numer_domu = '',
                  poczatek_miasto = '', koniec_ulica = '', koniec_numer_domu = '', koniec_miasto = '',
-                 koszt = '', napiwek = '', czas = '', godzina = '', fk_klienci = '', fk_kierowcy = '', fk_dyspozytorzy = ''):
+                 koszt = '', napiwek = '', czas = '', godzina = '', fk_klienci = '',
+                 fk_kierowcy = '', fk_dyspozytorzy = '', fk_samochody = ''):
         self.name = 'Przejazdy'
-        self.args = [('Data', data), ('Id', id), ('Ocena', ocena),
+        self.args = [('Data', data),
+                     ('Id', id),
+                     ('Ocena', ocena),
                      ('Poczatek_ulica', poczatek_ulica),
                      ('Poczatek_numer_domu', poczatek_numer_domu),
                      ('Poczatek_miasto', poczatek_miasto),
                      ('Koniec_ulica', koniec_ulica),
                      ('Koniec_numer_domu', koniec_numer_domu),
-                     ('Koniec_miasto', koniec_miasto), ('Koszt', koszt),
-                     ('Napiwek', napiwek), ('Czas', czas), ('Godzina', godzina),
-                     ('FK_Klienci', fk_klienci), ('FK_Kierowcy', fk_kierowcy),
-                     ('FK_Dyspozytorzy', fk_dyspozytorzy)]
+                     ('Koniec_miasto', koniec_miasto),
+                     ('Koszt', koszt),
+                     ('Napiwek', napiwek),
+                     ('Czas', czas),
+                     ('Godzina', godzina),
+                     ('FK_Klienci', fk_klienci),
+                     ('FK_Kierowcy', fk_kierowcy),
+                     ('FK_Dyspozytorzy', fk_dyspozytorzy),
+                     ('FK_Samochody',fk_samochody)]
         self.primary_key = 1
 
 

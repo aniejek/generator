@@ -3,8 +3,10 @@
 import random
 import time
 from datetime import date
-
 import tools as t
+
+for i in ["csv1.csv", "csv2.csv", "inserts.sql"]:
+    t.clearfile(i)
 
 FIRST_NAME_LIST = 'Imionam.txt'
 FIRST_NAME_LIST_SIZE = t.size_of_list(FIRST_NAME_LIST)
@@ -110,7 +112,12 @@ for i in range(LICZBA_PRZEJAZDOW):
     fk_klienci = random.choice(klienci)
     fk_kierowcy = wykorzystanie.args[2][1]
     fk_dyspozytorzy = random.choice(dyspozytorzy)
-    przejazdy.append(t.Przejazdy(date,i,ocena,poczatek_ulica,poczatek_nrdomu,poczatek_miasto,koniec_ulica,koniec_nrdomu,koniec_miasto,koszt,napiwek,czas,godzina,fk_klienci.args[fk_klienci.primary_key][1],fk_kierowcy,fk_dyspozytorzy.args[fk_dyspozytorzy.primary_key][1]))
+    fk_samochody = wykorzystanie.args[1][1]
+    print(fk_samochody)
+    przejazdy.append(t.Przejazdy(date,i,ocena,poczatek_ulica,poczatek_nrdomu,poczatek_miasto,
+        koniec_ulica,koniec_nrdomu,koniec_miasto,koszt,napiwek,czas,godzina,
+        fk_klienci.args[fk_klienci.primary_key][1],fk_kierowcy,fk_dyspozytorzy.args[fk_dyspozytorzy.primary_key][1],
+        fk_samochody))
 
 for e in dyspozytornie:
     e.to_sql('inserts.sql')
@@ -163,8 +170,11 @@ for i in range(NOWE_PRZEJAZDY):
     fk_klienci = random.choice(klienci)
     fk_kierowcy = wykorzystanie.args[2][1]
     fk_dyspozytorzy = random.choice(dyspozytorzy)
-    przejazd = t.Przejazdy(date,i+LICZBA_PRZEJAZDOW,ocena,poczatek_ulica,poczatek_nrdomu,poczatek_miasto,koniec_ulica,koniec_nrdomu,koniec_miasto,koszt,napiwek,czas,godzina,fk_klienci.args[fk_klienci.primary_key][1],fk_kierowcy,fk_dyspozytorzy.args[fk_dyspozytorzy.primary_key][1])
-
+    fk_kierowcy = wykorzystanie.args[2][1]
+    przejazd = t.Przejazdy(date,i+LICZBA_PRZEJAZDOW,ocena,poczatek_ulica,poczatek_nrdomu,poczatek_miasto,koniec_ulica,
+                           koniec_nrdomu,koniec_miasto,koszt,napiwek,czas,godzina,
+                           fk_klienci.args[fk_klienci.primary_key][1],fk_kierowcy,
+                           fk_dyspozytorzy.args[fk_dyspozytorzy.primary_key][1],fk_samochody)
     przejazdy.append(przejazd)
     przejazd.to_sql('inserts.sql')
 
