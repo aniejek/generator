@@ -17,7 +17,7 @@ CAR_MAKE_LIST_SIZE = t.size_of_list(CAR_MAKE_LIST)
 CAR_MODEL_LIST = 'modele.txt'
 CAR_MODEL_LIST_SIZE = t.size_of_list(CAR_MODEL_LIST)
 cities=["Gdańsk","Gdynia","Wrocław","Poznań","Straszyn","Sopot","Pruszcz Gdański"]
-streets=["ul. Długa","ul. Szeroka","ul. Konwaliowa","ul. Focha","ul. Jaworowa","ul. Lipowa","ul. Dębowa"]
+streets=["ul. Długa","ul. Szeroka","ul. Konwaliowa","ul. Focha","ul. Jaworowa","ul. Lipowa","ul. Dębowa","ul. Leśna Góra"]
 sources=["Od znajomego", "Przez reklamę na Facebooku", "Przez reklamę na innym portalu", "Przez reklamę tradycyjną", "Inne"]
 
 LICZBA_DYSPOZYTOROW = 10#int(input('Podaj liczbę dyspozytorow: '))
@@ -56,7 +56,7 @@ def generuj_przejazdy(liczba):
         poczatek_miasto = random.choice(cities)
         koniec_ulica = random.choice(streets)
         koniec_nrdomu = random.randint(1, 200)
-        koniec_miasto = random.choice(cities)
+        koniec_miasto = poczatek_miasto
         koszt = random.randint(15, 50)
         napiwek = random.randint(0, 20)
         czas = random.randint(1, 60)
