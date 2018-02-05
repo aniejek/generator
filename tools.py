@@ -43,7 +43,7 @@ class Entity:
 
 def clear_file(file, schema=""):
     with open(file, 'w') as file:
-        file.write(schema)
+        file.write(schema + '\n')
         file.close()
 
 
@@ -133,7 +133,7 @@ class Przejazdy(Entity):
                      ('Napiwek', napiwek),
                      ('Czas', czas),
                      ('Godzina', godzina),
-                     ('Numer faktury', nr_faktury),
+                     ('Nr_faktury', nr_faktury),
                      ('FK_Klienci', fk_klienci),
                      ('FK_Kierowcy', fk_kierowcy),
                      ('FK_Dyspozytorzy', fk_dyspozytorzy),

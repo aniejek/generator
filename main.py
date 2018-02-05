@@ -7,8 +7,7 @@ import tools as t
 
 t.clear_file("csv1.csv", "nr_rejestracyjny,data_przegladu,marka,model,rocznik,czy_nasz")
 t.clear_file("csv2.csv", "id,nr_rejestracyjny,pesel,data_rozpoczecia,data_zakonczenia")
-for i in ["inserts.sql", "update.sql"]:
-    t.clear_file(i)
+[t.clear_file(i) for i in ["inserts.sql", "update.sql"]]
 
 FIRST_NAME_LIST = 'Imionam.txt'
 FIRST_NAME_LIST_SIZE = t.size_of_list(FIRST_NAME_LIST)
