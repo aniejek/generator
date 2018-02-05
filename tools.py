@@ -186,3 +186,8 @@ class Samochody(Entity):
                      ('Data_ostatniego_przegladu', data_przegladu),
                      ('Marka', marka), ('Model', model), ('Rocznik', rocznik), ('Czyj', czy_nasz)]
         self.primary_key = 0
+
+class Data(Entity):
+    def __init__(self, data=''):
+        self.args[('Data', data)]
+        self.primary_key=0

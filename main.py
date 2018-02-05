@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 import random
 import time
-from datetime import date
+from datetime import date, timedelta
 import tools as t
 
 t.clear_file("csv1.csv", "nr_rejestracyjny,data_przegladu,marka,model,rocznik,czy_nasz")
@@ -74,6 +74,22 @@ def generuj_przejazdy(liczba):
                                      fk_dyspozytorzy.args[fk_dyspozytorzy.primary_key][1],
                                      fk_samochody))
 
+def generuj_wszystkie_daty(begin=date(2016,6,30), end=date.today()):
+    return [date.strftime("%Y-%m-%d") for date in [begin + timedelta(days=x) for x in range(0, (end - begin).days)]]
+
+def generuj_wszystkie_adresy():
+    with open('miasta.csv','a',encoding='utf-8') as csv:
+        for i in cities:
+            for j in streets:
+                for k in range(1,200):
+                    csv.write(i+','+j+','+str(k)+'\n')
+
+with open('daty.csv', 'a', encoding='utf8') as csv:
+    for i in generuj_wszystkie_daty():
+        csv.write(i)
+        csv.write('\n')
+
+generuj_wszystkie_adresy()
 
 for i in range(LICZBA_DYSPOZYTOROW):
     fname = t.take_random_line(FIRST_NAME_LIST, FIRST_NAME_LIST_SIZE)
@@ -157,7 +173,6 @@ for e in samochody:
 
 for e in wykorzystania:
     e.to_csv('csv2.csv')
-
 
 """
 drugi punkt w czasie
