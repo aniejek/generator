@@ -25,6 +25,8 @@ CREATE TABLE Kierowcy (
 	Nazwisko varchar(20) NOT NULL,
 	PESEL char(11) NOT NULL,
 	Data_rejestracji datetime NOT NULL,
+	Polecajacy char(11),
+	FOREIGN KEY(Polecajacy) REFERENCES Kierowcy(PESEL),
 	PRIMARY KEY(PESEL)
 );
 
@@ -40,7 +42,7 @@ CREATE TABLE Aplikacje (
 	Ulica varchar(30),
 	Numer_domu int NOT NULL,
 	Miasto varchar(30) NOT NULL,
-	Skad_sie_dowiedzial varchar(60) NOT NULL,
+	Skad_sie_dowiedzial varchar(25) NOT NULL,
 	Data_rejestracji datetime NOT NULL,
 	FK_Klienci int NOT NULL,
 	FOREIGN KEY(FK_Klienci) REFERENCES Klienci(ID),
