@@ -2,7 +2,6 @@
 from random import randint
 from datetime import date
 
-
 class Entity:
     def __init__(self):
         self.name = ""
@@ -12,13 +11,26 @@ class Entity:
     def to_sql(self, file):
         val_list = []
         col_list = []
+        are_null = False
         for arg in self.args:
+            if arg[1] == 'null':
+                are_null = True
             val_list.append(str(arg[1]))
             col_list.append(arg[0])
         insert = 'INSERT INTO ' + self.name + ' ('
         columns = ', '.join(col_list)
         insert = insert + columns + ')'
-        values = "'" + "', '".join(val_list) + "'"
+        if are_null:
+            values = ''
+            for i, val in enumerate(val_list):
+                if val == 'null':
+                    values += val
+                else:
+                    values += "'" + val + "'"
+                if i != len(val_list) - 1:
+                    values += ','
+        else:
+            values = "'" + "', '".join(val_list) + "'"
         insert = insert + '\nVALUES (' + values + ');\n'
         with open(file, 'a', encoding='utf8') as sql:
             sql.write(insert)
