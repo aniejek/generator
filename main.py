@@ -19,7 +19,7 @@ CAR_MODEL_LIST = 'modele.txt'
 CAR_MODEL_LIST_SIZE = t.size_of_list(CAR_MODEL_LIST)
 cities=["Gdańsk","Gdynia","Wrocław","Poznań","Straszyn","Sopot","Pruszcz Gdański"]
 streets=["ul. Długa","ul. Szeroka","ul. Konwaliowa","ul. Focha","ul. Jaworowa","ul. Lipowa","ul. Dębowa","ul. Leśna Góra"]
-sources=["Od znajomego", "Przez reklamę na Facebooku", "Przez reklamę na innym portalu", "Przez reklamę tradycyjną", "Inne"]
+sources=["Od znajomego", "z reklamy na fb", "z reklamy na innym portalu", "z reklamy tradycyjnej", "Inne"]
 
 LICZBA_DYSPOZYTOROW = 10#int(input('Podaj liczbę dyspozytorow: '))
 LICZBA_KIEROWCOW = 20#int(input('Prodaj liczbe kierowcow: '))
