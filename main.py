@@ -91,7 +91,7 @@ def generuj_wszystkie_godziny():
     with open('godziny.csv', 'a', encoding='utf8') as csv:
         for i in range (0,23):
             for j in range (0,59):
-                csv.write(str(i)+':'+str(j)+'\n')
+                csv.write(str(i).zfill(2)+':'+str(j).zfill(2)+'\n')
 
 with open('daty.csv', 'a', encoding='utf8') as csv:
     for i in generuj_wszystkie_daty():
