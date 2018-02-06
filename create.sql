@@ -9,7 +9,7 @@ DROP TABLE Godzina;
 DROP TABLE Data;
 
 CREATE TABLE Data (
-	id int not null,
+	id int not null auto_increment,
 	Rok varchar(4) not null,
 	Miesiac varchar(2) not null,
 	Dzien varchar(2) not null,
@@ -18,14 +18,14 @@ CREATE TABLE Data (
 );
 
 CREATE TABLE Godzina (
-	id int not null,
+	id int not auto_increment,
 	Godzina varchar(2) not null,
 	Minuta varchar(2) not null,
 	primary key (id)
 );
 
 CREATE TABLE Adres (
-	id int not null,
+	id int not null auto_increment,
 	Miasto varchar(20) not null,
 	Ulica varchar(15) not null,
 	Nr_domu varchar(300) not null,
@@ -33,13 +33,13 @@ CREATE TABLE Adres (
 );
 
 CREATE TABLE Smieci (
-	id int not null,
+	id int not null auto_increment,
 	Ocena varchar(15) not null,
 	primary key(id)
 );
 
 CREATE TABLE Samochody (
-	id int not null,
+	id int not null auto_increment,
 	Model varchar(15) not null,
 	Marka varchar(15) not null,
 	Rocznik char(4) not null,
@@ -47,14 +47,14 @@ CREATE TABLE Samochody (
 );
 
 CREATE TABLE Dyspozytorzy (
-	id int not null,
+	id int not null auto_increment,
 	Imie_i_nazwisko varchar(50) not null,
 	Miasto varchar(20) not null,
 	primary key(id)
 );
 
 CREATE TABLE Kierowcy (
-	id int not null,
+	id int not null auto_increment,
 	Imie_i_nazwisko varchar(50) not null,
 	Polecajacy int,
 	Staz varchar(7) not null,
@@ -64,7 +64,7 @@ CREATE TABLE Kierowcy (
 );
 
 CREATE TABLE Klienci (
-	id int not null,
+	id int not null auto_increment,
 	Imie_i_nazwisko varchar(50) not null,
 	Adres int not null,
 	Czy_korzysta_z_aplikacji bit not null,
