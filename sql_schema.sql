@@ -42,7 +42,7 @@ CREATE TABLE Aplikacje (
 	Ulica varchar(30),
 	Numer_domu int NOT NULL,
 	Miasto varchar(30) NOT NULL,
-	Skad_sie_dowiedzial varchar(25) NOT NULL,
+	Skad_sie_dowiedzial varchar(35) NOT NULL,
 	Data_rejestracji datetime NOT NULL,
 	FK_Klienci int NOT NULL,
 	FOREIGN KEY(FK_Klienci) REFERENCES Klienci(ID),
