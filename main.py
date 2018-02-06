@@ -89,9 +89,9 @@ def generuj_wszystkie_adresy():
 
 def generuj_wszystkie_godziny():
     with open('godziny.csv', 'a', encoding='utf8') as csv:
-        for i in range (0,23):
-            for j in range (0,59):
-                csv.write(str(i)+':'+str(j)+'\n')
+        for i in range (0,24):
+            for j in range (0,60):
+                csv.write(str(i).zfill(2)+':'+str(j).zfill(2)+'\n')
 
 with open('daty.csv', 'a', encoding='utf8') as csv:
     for i in generuj_wszystkie_daty():
