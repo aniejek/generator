@@ -20,10 +20,6 @@ lib64/
 parts/
 sdist/
 var/
-inserts.sql
-update.sql
-csv1.csv
-csv2.csv
 wheels/
 *.egg-info/
 .installed.cfg
