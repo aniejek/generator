@@ -7,6 +7,9 @@ import tools as t
 
 t.clear_file("csv1.csv", "nr_rejestracyjny,data_przegladu,marka,model,rocznik,czy_nasz")
 t.clear_file("csv2.csv", "id,nr_rejestracyjny,pesel,data_rozpoczecia,data_zakonczenia")
+t.clear_file("daty.csv", "Data")
+t.clear_file("godziny.csv", "Godzina")
+t.clear_file("adresy.csv","Miasto,Ulica,Nr_domu")
 [t.clear_file(i) for i in ["inserts.sql", "update.sql"]]
 
 FIRST_NAME_LIST = 'Imionam.txt'
@@ -78,11 +81,17 @@ def generuj_wszystkie_daty(begin=date(2016,6,30), end=date.today()):
     return [date.strftime("%Y-%m-%d") for date in [begin + timedelta(days=x) for x in range(0, (end - begin).days)]]
 
 def generuj_wszystkie_adresy():
-    with open('miasta.csv','a',encoding='utf-8') as csv:
+    with open('adresy.csv','a',encoding='utf-8') as csv:
         for i in cities:
             for j in streets:
                 for k in range(1,200):
                     csv.write(i+','+j+','+str(k)+'\n')
+
+def generuj_wszystkie_godziny():
+    with open('godziny.csv', 'a', encoding='utf8') as csv:
+        for i in range (0,23):
+            for j in range (0,59):
+                csv.write(str(i)+':'+str(j)+'\n')
 
 with open('daty.csv', 'a', encoding='utf8') as csv:
     for i in generuj_wszystkie_daty():
@@ -90,6 +99,7 @@ with open('daty.csv', 'a', encoding='utf8') as csv:
         csv.write('\n')
 
 generuj_wszystkie_adresy()
+generuj_wszystkie_godziny()
 
 for i in range(LICZBA_DYSPOZYTOROW):
     fname = t.take_random_line(FIRST_NAME_LIST, FIRST_NAME_LIST_SIZE)
