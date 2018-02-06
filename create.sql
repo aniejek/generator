@@ -69,7 +69,7 @@ CREATE TABLE Klienci (
 	Adres int not null,
 	Czy_korzysta_z_aplikacji bit not null,
 	Data_instalacji_aplikacji int,
-	Skad_sie_dowiedzial varchar(25),
+	Skad_sie_dowiedzial varchar(35),
 	foreign key(Adres) references Adres(id),
 	foreign key(Data_instalacji_aplikacji) references Data(id),
 	primary key(id)
